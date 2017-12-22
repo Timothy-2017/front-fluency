@@ -21,10 +21,10 @@ const ArticleNew = (props) => {
           onChange={(e) => props.handleChangeLanguage(e)}
           value={props.title}
         >
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <option value="it">Italian</option>
-          <option value="de">German</option>
+          <option value="1">Spanish</option>
+          <option value="2">French</option>
+          <option value="4">Italian</option>
+          <option value="3">German</option>
         </select>
       </label>
         <button type="submit">Submit</button>
