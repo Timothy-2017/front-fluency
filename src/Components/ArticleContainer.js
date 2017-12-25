@@ -10,9 +10,7 @@ class ArticleContainer extends Component {
 
     this.state = {
       translated_article: '',
-      language: '',
-      language_id: 5,
-      // display_article: ''
+      language_id: "1",
       english_article: {}
     };
   }
@@ -23,7 +21,6 @@ class ArticleContainer extends Component {
     .then(res => {
       // console.log("didMount", res[0])
       this.setState({
-        // display_article_id: res[0].id,
         english_article: res[0],
     })
     });
@@ -37,7 +34,6 @@ class ArticleContainer extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        // display_article_id: this.state.display_article_id,
         english_article: this.state.english_article,
         language_id: this.state.language_id
       })
@@ -64,7 +60,7 @@ class ArticleContainer extends Component {
 
   render() {
     // console.log("ARTICLE CONTAINER PROPS", this.props)
-    // console.log("ARTICLE CONTAINER STATE", this.state)
+    console.log("ARTICLE CONTAINER STATE", this.state)
     return (
       <div>
         <LanguageSelect
@@ -79,7 +75,5 @@ class ArticleContainer extends Component {
     )
   }
 }
-
-// language={this.state.language}
 
 export default ArticleContainer;
