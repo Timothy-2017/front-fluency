@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import LanguageSelect from './LanguageSelect';
-import ArticleDetail from './ArticleDetail';
-
+// import ArticleDetail from './ArticleDetail';
+import WordsContainer from './WordsContainer';
+import Word from './Word';
 
 class ArticleContainer extends Component {
 
@@ -9,9 +10,9 @@ class ArticleContainer extends Component {
     super();
 
     this.state = {
-      translated_article: '',
       language_id: "1",
-      english_article: {}
+      english_article: {},
+      translated_article: ''
     };
   }
 
@@ -60,7 +61,8 @@ class ArticleContainer extends Component {
 
   render() {
     // console.log("ARTICLE CONTAINER PROPS", this.props)
-    console.log("ARTICLE CONTAINER STATE", this.state)
+    // console.log("ARTICLE CONTAINER STATE", this.state)
+    // debugger
     return (
       <div>
         <LanguageSelect
@@ -68,8 +70,14 @@ class ArticleContainer extends Component {
           handleChangeLanguage={this.handleChangeLanguage}
           language_id={this.state.language_id}
         />
-        <ArticleDetail
-          translated_article={this.state.translated_article}
+
+        <WordsContainer
+        translated_article={this.state.translated_article}
+        english_article_description={this.state.english_article.description}
+        />
+        <Word
+        translated_article={this.state.translated_article}
+        english_article_description={this.state.english_article.description}
         />
       </div>
     )
@@ -77,3 +85,8 @@ class ArticleContainer extends Component {
 }
 
 export default ArticleContainer;
+
+// <ArticleDetail
+//   translated_article={this.state.translated_article}
+//   english_article_description={this.state.english_article.description}
+// />

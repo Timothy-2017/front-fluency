@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+// import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux'
 import ArticleContainer from './Components/ArticleContainer'
-import './App.css';
+// import './App.css';
 
 class App extends Component {
   render() {
@@ -12,4 +14,16 @@ class App extends Component {
   }
 }
 
-export default App;
+// const mapStateToProps = (state) => {
+//   return { items: state.items };
+// };
+
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators({
+//     addItem: addItem
+//   }, dispatch);
+// };
+
+// export default connect(mapStateToProps, actions)(App);
+
+export default App
