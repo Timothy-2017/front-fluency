@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import LanguageSelect from './LanguageSelect';
-// import ArticleDetail from './ArticleDetail';
-import WordsContainer from './WordsContainer';
-import Word from './Word';
+import WordsList from './WordsList';
 
 class ArticleContainer extends Component {
 
@@ -70,14 +68,9 @@ class ArticleContainer extends Component {
           handleChangeLanguage={this.handleChangeLanguage}
           language_id={this.state.language_id}
         />
-
-        <WordsContainer
-        translated_article={this.state.translated_article}
-        english_article_description={this.state.english_article.description}
-        />
-        <Word
-        translated_article={this.state.translated_article}
-        english_article_description={this.state.english_article.description}
+        <WordsList
+          translated_article={this.state.translated_article}
+          english_article_description={this.state.english_article.description}
         />
       </div>
     )
@@ -85,8 +78,3 @@ class ArticleContainer extends Component {
 }
 
 export default ArticleContainer;
-
-// <ArticleDetail
-//   translated_article={this.state.translated_article}
-//   english_article_description={this.state.english_article.description}
-// />
