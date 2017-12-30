@@ -5,7 +5,7 @@ const FavoriteWordsList = (props) => {
 
   // console.log(props.favoriteWords);
   const favoriteWordMap = () => {
-    return props.favoriteWords.map((favorite, i) => <FavoriteWord word={favorite.word} translated={favorite.translated} key={i}/>)
+    return props.favoriteWords.map((favorite, i) => <FavoriteWord word={favorite.word} translated={favorite.translated} handleDelete={props.handleDelete} id={favorite.id} key={i}/>)
   }
 
   return (

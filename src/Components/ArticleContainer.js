@@ -15,7 +15,6 @@ class ArticleContainer extends Component {
       user_id: "1",
       favoriteWords: []
     };
-    this.handleDoubleClick = this.handleDoubleClick.bind(this);
   }
 
   componentDidMount() {
@@ -52,7 +51,6 @@ class ArticleContainer extends Component {
     })
     .then(res => res.json())
     .then(res => {
-      // console.log(res)
       this.setState({
       translated_article: res.translated_article
     })
@@ -71,11 +69,6 @@ class ArticleContainer extends Component {
   }
 
   handleDoubleClick = (e, translated, word) => {
-    // console.log(e)
-    // console.log(translated)
-    // console.log(word)
-    // console.log(this.state.user_id)
-    // debugger
     fetch('http://localhost:3000/api/v1/favorites', {
       method: "POST",
       headers: {
@@ -87,7 +80,24 @@ class ArticleContainer extends Component {
       .then(res => res.json())
       .then((favorite) => {
         this.setState(prevState => ({
-          favoriteWords: [...prevState.favoriteWords, {word: word, translated: translated, user_id: this.state.user_id}]
+          favoriteWords: [...prevState.favoriteWords, {word: word, translated: translated, user_id: this.state.user_id, id: favorite.id}]
+        }))
+      })
+  }
+
+  handleDelete = (id) => {
+    fetch(`http://localhost:3000/api/v1/favorites/${id}`, {
+      method: "DELETE",
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+      }
+      })
+      .then((favorite) => {
+        this.setState(prevState => ({
+          favoriteWords: this.state.favoriteWords.filter(word => word.id !== id)
         }))
       })
   }
@@ -110,6 +120,7 @@ class ArticleContainer extends Component {
         />
         <FavoriteWordsList
           favoriteWords={this.state.favoriteWords}
+          handleDelete={this.handleDelete}
         />
       </div>
     )
