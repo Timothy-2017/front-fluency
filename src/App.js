@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { bindActionCreators } from 'redux';
 // import { connect } from 'react-redux'
-import ArticleContainer from './Components/ArticleContainer'
+import ArticleContainer from './Components/ArticleContainer';
 // import './App.css';
 
 class App extends Component {
