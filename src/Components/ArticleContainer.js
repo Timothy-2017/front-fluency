@@ -32,7 +32,9 @@ class ArticleContainer extends Component {
         // debugger})
         // console.log("didMount favorites", res)})
         this.setState({
-          favoriteWords: res.filter(favorite => favorite.user_id === parseInt(this.state.user_id, 10))
+          favoriteWords: res.filter(favorite => favorite.user_id === parseInt(this.state.user_id, 10)).sort(function(a, b) {
+          return a.id - b.id;
+        })
       })
       })
   }
@@ -55,6 +57,7 @@ class ArticleContainer extends Component {
       translated_article: res.translated_article
     })
     })
+    // .then(res => {console.log(res)})
   }
 
   handleSubmit = e => {
@@ -81,6 +84,29 @@ class ArticleContainer extends Component {
       .then((favorite) => {
         this.setState(prevState => ({
           favoriteWords: [...prevState.favoriteWords, {word: word, translated: translated, user_id: this.state.user_id, id: favorite.id}]
+        }))
+      })
+  }
+
+  addNote = (id, note, word, translated) => {
+    console.log("id", id);
+    console.log("note", note);
+    fetch(`http://localhost:3000/api/v1/favorites/${id}`, {
+      method: "PUT",
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Z-Key',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS'
+      },
+      body: JSON.stringify({id: id, note: note})
+      })
+      .then(res => res.json())
+      .then(favorite => {
+        this.setState(prevState => ({
+          favoriteWords: [...prevState.favoriteWords.filter(fave => { return fave.id !== id}), {word: word, translated: translated, user_id: favorite.user_id, id: favorite.id, note: favorite.note}].sort(function(a, b) {
+          return a.id - b.id;
+        })
         }))
       })
   }
@@ -121,6 +147,7 @@ class ArticleContainer extends Component {
         <FavoriteWordsList
           favoriteWords={this.state.favoriteWords}
           handleDelete={this.handleDelete}
+          addNote={this.addNote}
         />
       </div>
     )

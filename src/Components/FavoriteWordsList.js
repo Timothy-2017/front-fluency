@@ -3,9 +3,9 @@ import FavoriteWord from './FavoriteWord';
 
 const FavoriteWordsList = (props) => {
 
-  // console.log(props.favoriteWords);
+  // console.log(props);
   const favoriteWordMap = () => {
-    return props.favoriteWords.map((favorite, i) => <FavoriteWord word={favorite.word} translated={favorite.translated} handleDelete={props.handleDelete} id={favorite.id} key={i}/>)
+    return props.favoriteWords.map((favorite, i) => <FavoriteWord word={favorite.word} translated={favorite.translated} note={favorite.note} handleDelete={props.handleDelete} id={favorite.id} key={i} noteComponent={props.noteComponent} addNote={props.addNote}/>)
   }
 
   return (
