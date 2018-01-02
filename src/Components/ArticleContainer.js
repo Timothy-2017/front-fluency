@@ -23,17 +23,6 @@ class ArticleContainer extends Component {
   }
 
   componentDidMount() {
-  fetch('http://localhost:3000/api/v1/articles')
-    .then(res => res.json())
-    .then(res => {
-      // debugger
-      // console.log("didMount", res[0])
-      this.setState({
-        // english_article: res[0],
-        english_articles: res,
-        // english_article: res[Math.floor(Math.random() * this.state.english_articles.length)]
-    })
-    });
     fetch('http://localhost:3000/api/v1/favorites')
       .then(res => res.json())
       .then(res => {
@@ -45,6 +34,17 @@ class ArticleContainer extends Component {
         })
       })
       })
+    fetch('http://localhost:3000/api/v1/articles')
+      .then(res => res.json())
+      .then(res => {
+        // debugger
+        // console.log("didMount", res[0])
+        this.setState({
+          // english_article: res[0],
+          english_articles: res,
+          // english_article: res[Math.floor(Math.random() * this.state.english_articles.length)]
+      })
+      });
   }
 
   // this.setState({
@@ -53,6 +53,7 @@ class ArticleContainer extends Component {
 
   translate() {
     let newArticle = this.state.english_articles[Math.floor(Math.random() * this.state.english_articles.length)]
+    // let newArticle = this.state.english_articles[0]
     fetch('http://localhost:3000/api/v1/translations', {
       method: "POST",
       headers: {
@@ -60,7 +61,7 @@ class ArticleContainer extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        english_article: newArticle,
+        english_article: newArticle.article_text,
         language_id: this.state.language_id
       })
     })
@@ -161,7 +162,7 @@ class ArticleContainer extends Component {
         />
         <WordsList
           translated_article={this.state.translated_article}
-          english_article_description={this.state.english_article}
+          english_article={this.state.english_article}
           handleDoubleClick={this.handleDoubleClick}
         />
         <FavoriteWordsList
