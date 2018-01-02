@@ -11,12 +11,17 @@
 // function languageReducer(state = [], action) {
 //   switch (action.type) {
 //
-//     case "ADD_BOOK":
-//       return state.concat(action.book);
+//     case "1":
+//       return
 //
-//     case "REMOVE_BOOK":
-//       const idx = state.indexOf(action.id);
-//       return [ ...state.slice(0, idx), ...state.slice(idx + 1) ];
+//     case "2":
+//       return
+//
+//     case "3":
+//       return
+//
+//     case "4":
+//       return 
 //
 //     default:
 //       return state;
@@ -26,12 +31,6 @@
 // function englishReducer(state = [], action) {
 //   switch (action.type) {
 //
-//     case "ADD_AUTHOR":
-//       return state.concat(action.author);
-//
-//     case "REMOVE_AUTHOR":
-//       const idx = state.indexOf(action.id);
-//       return [ ...state.slice(0, idx), ...state.slice(idx + 1) ];
 //
 //     default:
 //       return state;
@@ -41,12 +40,6 @@
 //   function translatedReducer(state = [], action) {
 //     switch (action.type) {
 //
-//       case "ADD_AUTHOR":
-//         return state.concat(action.author);
-//
-//       case "REMOVE_AUTHOR":
-//         const idx = state.indexOf(action.id);
-//         return [ ...state.slice(0, idx), ...state.slice(idx + 1) ];
 //
 //       default:
 //         return state;

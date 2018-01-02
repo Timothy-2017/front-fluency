@@ -23,8 +23,8 @@ class Note extends Component {
   }
 
   render() {
-    console.log("Note props", this.props);
-    console.log("Note from state", this.state.note);
+    // console.log("Note props", this.props);
+    // console.log("Note from state", this.state.note);
     return (
       <div>
         <form onSubmit={this.handleSubmit} >

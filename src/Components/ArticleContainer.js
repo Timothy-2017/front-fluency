@@ -10,20 +10,28 @@ class ArticleContainer extends Component {
 
     this.state = {
       language_id: "1",
-      english_article: {},
+      english_article: '',
+      english_articles: [],
       translated_article: '',
       user_id: "1",
       favoriteWords: []
     };
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChangeLanguage = this.handleChangeLanguage.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
+    this.handleDoubleClick = this.handleDoubleClick.bind(this)
   }
 
   componentDidMount() {
   fetch('http://localhost:3000/api/v1/articles')
     .then(res => res.json())
     .then(res => {
+      // debugger
       // console.log("didMount", res[0])
       this.setState({
-        english_article: res[0],
+        // english_article: res[0],
+        english_articles: res,
+        // english_article: res[Math.floor(Math.random() * this.state.english_articles.length)]
     })
     });
     fetch('http://localhost:3000/api/v1/favorites')
@@ -39,7 +47,12 @@ class ArticleContainer extends Component {
       })
   }
 
+  // this.setState({
+  //   english_article: this.state.english_articles[Math.floor(Math.random() * this.state.english_articles.length)]
+  // })
+
   translate() {
+    let newArticle = this.state.english_articles[Math.floor(Math.random() * this.state.english_articles.length)]
     fetch('http://localhost:3000/api/v1/translations', {
       method: "POST",
       headers: {
@@ -47,14 +60,15 @@ class ArticleContainer extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        english_article: this.state.english_article,
+        english_article: newArticle,
         language_id: this.state.language_id
       })
     })
     .then(res => res.json())
     .then(res => {
       this.setState({
-      translated_article: res.translated_article
+      translated_article: res.translated_article,
+      english_article: newArticle
     })
     })
     // .then(res => {console.log(res)})
@@ -62,7 +76,9 @@ class ArticleContainer extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+
     this.translate();
+
   }
 
   handleChangeLanguage = e => {
@@ -89,8 +105,8 @@ class ArticleContainer extends Component {
   }
 
   addNote = (id, note, word, translated) => {
-    console.log("id", id);
-    console.log("note", note);
+    // console.log("id", id);
+    // console.log("note", note);
     fetch(`http://localhost:3000/api/v1/favorites/${id}`, {
       method: "PUT",
       headers: {
@@ -130,7 +146,11 @@ class ArticleContainer extends Component {
 
   render() {
     // console.log("ARTICLE CONTAINER PROPS", this.props)
-    // console.log("ARTICLE CONTAINER STATE", this.state)
+    // console.log("english_articles", this.state.english_articles)
+    console.log("english_article", this.state.english_article)
+    console.log("translated_article", this.state.translated_article)
+    console.log('-------------------------------------------------');
+
     // debugger
     return (
       <div>
@@ -141,7 +161,7 @@ class ArticleContainer extends Component {
         />
         <WordsList
           translated_article={this.state.translated_article}
-          english_article_description={this.state.english_article.description}
+          english_article_description={this.state.english_article}
           handleDoubleClick={this.handleDoubleClick}
         />
         <FavoriteWordsList
@@ -155,3 +175,9 @@ class ArticleContainer extends Component {
 }
 
 export default ArticleContainer;
+
+// <WordsList
+//   translated_article={this.state.translated_article}
+//   english_article_description={this.state.english_article.description}
+//   handleDoubleClick={this.handleDoubleClick}
+// />

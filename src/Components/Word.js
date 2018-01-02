@@ -15,9 +15,9 @@ class Word extends Component {
   render() {
     // console.log("Word", this.props.handleDoubleClick);
     return (
-      <div>
-        {this.props.word !== this.props.translated ? this.toggleWord(this.props.translated, this.props.word) : this.props.word}
-      </div>
+      <span>
+        {this.props.word !== this.props.translated ? this.toggleWord(this.props.translated, this.props.word) : this.props.word.concat(' ')}
+      </span>
     )
   }
 }
