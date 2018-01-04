@@ -10,7 +10,7 @@ const FavoriteWordsList = (props) => {
 
   return (
     <div>
-      <h1>Words to Practice</h1>
+      <h1>Flash Cards</h1>
       {props.favoriteWords.length > 0 ? favoriteWordMap() : ''}
     </div>
   )

@@ -22,21 +22,11 @@ class FavoriteWord extends Component {
     });
   }
 
-  // handleChange = e => {
-  //   this.setState({ note: e.target.value });
-  // }
-  //
-  // handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   this.props.addCocktail(this.state)
-  //   this.clearFields()
-  // }
-
-  clearForm = () => { //
-    this.setState({ //
-      showNote: false //
-    }) //
-  } //
+  clearForm = () => {
+    this.setState({
+      showNote: false
+    })
+  }
 
   render() {
     // console.log("FavoriteWord props", this.props);
@@ -48,7 +38,8 @@ class FavoriteWord extends Component {
         <div>{this.props.note ? this.props.note : ''}</div>
 
         <button type="submit" onClick={() => this.editNote()} >
-          Edit/Add Note
+        {this.props.note ? 'Edit Note' : 'Add Note'}
+
         </button>
         {this.state.showNote ? <Note note={this.props.note ? this.props.note : 'Add Note'} id={this.props.id} addNote={this.props.addNote} word={this.props.word} translated={this.props.translated} clearForm={this.clearForm}/> : null}
       </div>

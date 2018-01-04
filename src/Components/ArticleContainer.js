@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import LanguageSelect from './LanguageSelect';
+// import LanguageSelect from './LanguageSelect';
 import WordsList from './WordsList';
 import FavoriteWordsList from './FavoriteWordsList';
+import DropdownSimple from './DropdownSimple';
 
 class ArticleContainer extends Component {
 
@@ -9,12 +10,12 @@ class ArticleContainer extends Component {
     super();
 
     this.state = {
-      language_id: "1",
       english_articles: [],
       user_id: "1",
       favoriteWords: [],
       englishTranslated: []
     };
+    this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
   }
 
   componentDidMount() {
@@ -48,7 +49,7 @@ class ArticleContainer extends Component {
     ));
   }
 
-  translate(art) {
+  translate(art, value) {
     fetch('http://localhost:3000/api/v1/translations', {
       method: "POST",
       headers: {
@@ -57,7 +58,7 @@ class ArticleContainer extends Component {
       },
       body: JSON.stringify({
         english_article: art.article_text,
-        language_id: this.state.language_id
+        language_id: value
       })
     })
     .then(res => res.json())
@@ -68,18 +69,15 @@ class ArticleContainer extends Component {
     })
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.state.english_articles.map(art => (
-      this.translate(art)
-    ))
-  }
 
-  handleChangeLanguage = e => {
+  handleChangeLanguage = (e, value) => {
+    e.preventDefault();
     this.setState({
-      language_id: e.target.value,
       englishTranslated: []
     });
+    this.state.english_articles.map((art) => (
+      this.translate(art, value)
+    ))
   }
 
   handleDoubleClick = (e, translated, word) => {
@@ -140,10 +138,8 @@ class ArticleContainer extends Component {
   render() {
     return (
       <div>
-        <LanguageSelect
-          handleSubmit={this.handleSubmit}
+        <DropdownSimple
           handleChangeLanguage={this.handleChangeLanguage}
-          language_id={this.state.language_id}
         />
         <FavoriteWordsList
           favoriteWords={this.state.favoriteWords}
