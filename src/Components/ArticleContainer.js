@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
-// import LanguageSelect from './LanguageSelect';
 import WordsList from './WordsList';
 import FavoriteWordsList from './FavoriteWordsList';
 import DropdownSimple from './DropdownSimple';
+import ItemExampleDescriptions from './ItemExampleDescriptions';
+import HeaderExample from './HeaderExample';
+
+import { Grid} from 'semantic-ui-react';
+// import { Grid, Image } from 'semantic-ui-react';
+
 
 class ArticleContainer extends Component {
 
@@ -135,21 +140,45 @@ class ArticleContainer extends Component {
       })
   }
 
+  TwoEnglishTranslatedList() {
+    return this.state.englishTranslated.map((art, i) => (
+      <ItemExampleDescriptions
+        english_article={art.english_article}
+        article_url={art.article_url}
+        translated_article={art.translated_article}
+        handleDoubleClick={this.handleDoubleClick}
+        key={i}
+      />
+    ));
+  }
+
   render() {
     return (
       <div>
+        <HeaderExample />
         <DropdownSimple
           handleChangeLanguage={this.handleChangeLanguage}
         />
-        <FavoriteWordsList
-          favoriteWords={this.state.favoriteWords}
-          handleDelete={this.handleDelete}
-          addNote={this.addNote}
-        />
-        {this.state.englishTranslated.length !== 0 ? this.englishTranslatedList() : null}
+        <Grid>
+          <Grid.Column width={12}>
+            <h2>Articles</h2>
+            
+            {this.state.englishTranslated.length !== 0 ? this.TwoEnglishTranslatedList() : null}
+          </Grid.Column>
+          <Grid.Column width={4}>
+            <FavoriteWordsList
+              favoriteWords={this.state.favoriteWords}
+              handleDelete={this.handleDelete}
+              addNote={this.addNote}
+            />
+          </Grid.Column>
+        </Grid>
+
       </div>
     )
   }
 }
+
+// {this.state.englishTranslated.length !== 0 ? this.englishTranslatedList() : null}
 
 export default ArticleContainer;
