@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Form } from 'semantic-ui-react'
 
 class Note extends Component {
 
@@ -27,19 +28,36 @@ class Note extends Component {
     // console.log("Note from state", this.state.note);
     return (
       <div>
-        <form onSubmit={this.handleSubmit} >
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Field>
+          <label>Note</label>
           <input
+            placeholder='Add Note Here'
             id="note"
             type="text"
             name="note"
             onChange={this.handleChange}
             value={this.state.note}
           />
-          <button type="submit">Submit</button>
-        </form>
+        </Form.Field>
+        <Button type="submit">Submit</Button>
+      </Form>
       </div>
     )
   }
 }
+
+// <div>
+//   <form onSubmit={this.handleSubmit} >
+//     <input
+//       id="note"
+//       type="text"
+//       name="note"
+//       onChange={this.handleChange}
+//       value={this.state.note}
+//     />
+//     <button type="submit">Submit</button>
+//   </form>
+// </div>
 
 export default Note
