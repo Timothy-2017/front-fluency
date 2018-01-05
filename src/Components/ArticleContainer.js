@@ -4,10 +4,7 @@ import FavoriteWordsList from './FavoriteWordsList';
 import DropdownSimple from './DropdownSimple';
 import ItemExampleDescriptions from './ItemExampleDescriptions';
 import HeaderExample from './HeaderExample';
-
 import { Grid} from 'semantic-ui-react';
-// import { Grid, Image } from 'semantic-ui-react';
-
 
 class ArticleContainer extends Component {
 
@@ -162,7 +159,7 @@ class ArticleContainer extends Component {
         <Grid>
           <Grid.Column width={12}>
             <h2>Articles</h2>
-            
+            <h3>Click on a highlighted word to view its translation. Double-click to create a flashcard.</h3>
             {this.state.englishTranslated.length !== 0 ? this.TwoEnglishTranslatedList() : null}
           </Grid.Column>
           <Grid.Column width={4}>

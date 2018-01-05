@@ -1,16 +1,20 @@
-const english_article_description = "These 17 companies all struggled in 2017. Many of them closed stores, and some have even filed for bankruptcy at least once before."
-const translated_article = "These 17 companies todo struggled en 2017 muchos de ellos cerrado stores y algunos tener incluso filed para quiebra en menos once antes"
+<Card>
+  <Card.Content>
+    <Card.Header>
+      {this.props.word !== this.props.translated ? this.toggleWord(this.props.translated, this.props.word) : this.props.word}
+    </Card.Header>
+    <Card.Description>
+      {this.props.note ? this.props.note : ''}
+    </Card.Description>
+  </Card.Content>
+  <Card.Content extra>
+    <div className='ui two buttons'>
+      <Button basic color='green' onClick={() => this.editNote()}>{this.props.note ? 'Edit Note' : 'Add Note'}</Button>
+      <Button basic color='red' onClick={() => this.props.handleDelete(this.props.id)}>Delete</Button>
+    </div>
+  </Card.Content>
+</Card>
+/////////////////////////////////////////////////
+<button type="submit" ></button>
 
-english_article_description.split(' ').length
-
-const newArticle = []
-const english_article_description_array = english_article_description.split(' ')
-const translated_article_array = translated_article.split(' ')
-
-english_article_description_array.forEach((word, i) => {
-  if (word !== translated_article_array[i]) {
-    newArticle.push(translated_article_array[i])
-  }
-})
-
-// newArticle
+<button ></button>

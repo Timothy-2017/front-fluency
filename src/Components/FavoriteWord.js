@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Note from './Note';
-import { Card } from 'semantic-ui-react';
+import { Card, Button } from 'semantic-ui-react';
 
 class FavoriteWord extends Component {
 
@@ -30,39 +30,31 @@ class FavoriteWord extends Component {
   }
 
   render() {
-    // console.log("FavoriteWord props", this.props);
     return (
       <div>
-        {this.state.showNote ? <Note note={this.props.note ? this.props.note : 'Add Note'} id={this.props.id} addNote={this.props.addNote} word={this.props.word} translated={this.props.translated} clearForm={this.clearForm}/> : null}
-        <Card
-          header={this.props.word !== this.props.translated ? this.toggleWord(this.props.translated, this.props.word) : this.props.word}
-          description={this.props.note ? this.props.note : ''}
-        />
-        <button type="submit" onClick={() => this.editNote()}>{this.props.note ? 'Edit Note' : 'Add Note'}</button>
-        <button onClick={() => this.props.handleDelete(this.props.id)}>Delete</button>
-        <h1> </h1>
+        <Card>
+          <Card.Content>
+            <Card.Header>
+              {this.props.word !== this.props.translated ? this.toggleWord(this.props.translated, this.props.word) : this.props.word}
+            </Card.Header>
+            <Card.Description>
+              {this.props.note ? this.props.note : ''}
+            </Card.Description>
+          </Card.Content>
+          <Card.Content extra>
+            <div className='ui two buttons'>
+              <Button basic color='green' onClick={() => this.editNote()}>{this.props.note ? 'Edit Note' : 'Add Note'}</Button>
+              <Button basic color='red' onClick={() => this.props.handleDelete(this.props.id)}>Delete Flashcard</Button>
+            </div>
+          </Card.Content>
+        </Card>
+          {this.state.showNote ? <Note note={this.props.note} id={this.props.id} addNote={this.props.addNote} word={this.props.word} translated={this.props.translated} clearForm={this.clearForm}/> : null}
       </div>
     )
   }
 }
 
-export default FavoriteWord
+// {this.state.showNote ? <Note note={this.props.note ? this.props.note : 'Add Note'} id={this.props.id} addNote={this.props.addNote} word={this.props.word} translated={this.props.translated} clearForm={this.clearForm}/> : null}
 
-// return (
-//   <div>
-//     {this.props.word !== this.props.translated ? this.toggleWord(this.props.translated, this.props.word) : this.props.word}
-//     <button onClick={() => this.props.handleDelete(this.props.id)}>Delete</button>
-//
-//     <div>{this.props.note ? this.props.note : ''}</div>
-//
-//     <button type="submit" onClick={() => this.editNote()} >
-//     {this.props.note ? 'Edit Note' : 'Add Note'}
-//
-//     </button>
-//     {this.state.showNote ? <Note note={this.props.note ? this.props.note : 'Add Note'} id={this.props.id} addNote={this.props.addNote} word={this.props.word} translated={this.props.translated} clearForm={this.clearForm}/> : null}
-//     <Card
-//       header={this.props.word !== this.props.translated ? this.toggleWord(this.props.translated, this.props.word) : this.props.word}
-//       description={this.props.note ? this.props.note : ''}
-//     />
-//   </div>
-// )
+
+export default FavoriteWord
